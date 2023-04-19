@@ -18,7 +18,7 @@ public class PC_Action : MonoBehaviour
             RaycastHit2D hit = Physics2D.Raycast(mainCam.ScreenToWorldPoint(Input.mousePosition),Vector2.zero);
             if(hit.collider != null)
             {
-                Debug.Log("Target name: " + hit.collider.name);
+                hit.collider.gameObject.SetActive(false);
             }
         }
     }
