@@ -6,28 +6,29 @@ public class SquareInfo : MonoBehaviour
 {
     [SerializeField] string color;
     public int columnSpawned;
-    Spawner spawner;
+    SpawnManager spawner;
     private void Start()
     {
-        spawner = GameObject.Find("GameManager").GetComponent<Spawner>();
+        spawner = GameObject.Find("GameManager").GetComponent<SpawnManager>();
     }
     private void OnDisable()
     {
         switch (columnSpawned)
         {
             case 1:
-                spawner.stackCol1--;
+                spawner.stackedCol1--;
                 break;
             case 2:
-                spawner.stackCol2--;
+                spawner.stackedCol2--;
                 break;
             case 3:
-                spawner.stackCol3--;
+                spawner.stackedCol3--;
                 break;
             case 4:
-                spawner.stackCol4--;
+                spawner.stackedCol4--;
                 break;
-            default: return;
+            default: 
+            break;
         }
     }
 }

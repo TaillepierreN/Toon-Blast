@@ -57,6 +57,8 @@ public class Spawner : MonoBehaviour
             case 3:
                 stackCol4++;
                 break;
+            default:
+            break;
         }
         GameObject squareSpawned = Instantiate(cubes[Random.Range(0, 5)], cols[index].position, Quaternion.identity);
         squareSpawned.GetComponent<SquareInfo>().columnSpawned = index + 1;

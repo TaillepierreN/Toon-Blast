@@ -336,6 +336,7 @@ GameObject:
   - component: {fileID: 665422322}
   - component: {fileID: 665422321}
   - component: {fileID: 665422323}
+  - component: {fileID: 665422324}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -376,7 +377,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 665422320}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e9660fdf5507b564d886eee5069f3593, type: 3}
   m_Name: 
@@ -392,6 +393,38 @@ MonoBehaviour:
   - {fileID: 7405743641173539008, guid: 30af6088644484649ae59e93d83625d2, type: 3}
   - {fileID: 7405743641173539008, guid: dfdee8e6c92c7874fbb855c276eede74, type: 3}
   - {fileID: 7405743641173539008, guid: 98ff5562890a7344eac55b4e00d6da11, type: 3}
+  stackCol1: 0
+  stackCol2: 0
+  stackCol3: 0
+  stackCol4: 0
+--- !u!114 &665422324
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 665422320}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 119c31557858f15429e18c42ed7f0933, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cols:
+  - {fileID: 742372218}
+  - {fileID: 1973959457}
+  - {fileID: 974476560}
+  - {fileID: 2119002351}
+  cubes:
+  - {fileID: 7405743641173539008, guid: 98ff5562890a7344eac55b4e00d6da11, type: 3}
+  - {fileID: 7405743641173539008, guid: dfdee8e6c92c7874fbb855c276eede74, type: 3}
+  - {fileID: 7405743641173539008, guid: 30af6088644484649ae59e93d83625d2, type: 3}
+  - {fileID: 7405743641173539008, guid: 6201836ec6277c144bb4dd68be4b49c6, type: 3}
+  - {fileID: 7405743641173539008, guid: 8549ebc6bd717fd47a7b66859b614864, type: 3}
+  poolDepot: {fileID: 899919220}
+  poolCol1: []
+  poolCol2: []
+  poolCol3: []
+  poolCol4: []
 --- !u!1 &742372217
 GameObject:
   m_ObjectHideFlags: 0
@@ -475,6 +508,36 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7405743641173539012, guid: dfdee8e6c92c7874fbb855c276eede74, type: 3}
   m_PrefabInstance: {fileID: 357032463}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &899919219
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 899919220}
+  m_Layer: 0
+  m_Name: PoolDepot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &899919220
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 899919219}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 4.410812, y: -1.5376753, z: 6.5581594}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &936346653 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7405743641173539012, guid: dfdee8e6c92c7874fbb855c276eede74, type: 3}
