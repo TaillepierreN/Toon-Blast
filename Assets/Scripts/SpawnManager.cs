@@ -7,40 +7,34 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] Transform[] cols;
     [SerializeField] GameObject[] cubes;
     [SerializeField] Transform poolDepot;
-    public List<GameObject> poolCol1;
-    public List<GameObject> poolCol2;
-    public List<GameObject> poolCol3;
-    public List<GameObject> poolCol4;
-    GameObject spawnedObject1;
-    GameObject spawnedObject2;
-    GameObject spawnedObject3;
-    GameObject spawnedObject4;
+    public List<GameObject> commonPool;
+    GameObject spawnedObject;
     public int stackedCol1;
     public int stackedCol2;
     public int stackedCol3;
     public int stackedCol4;
-    void Start()
+    bool firstInstantiation;
+    int numberOfSquareToCreate;
+    private void Awake()
     {
-        for (int i = 0; i < 10; i++)
-        {
-            spawnedObject1 = CreateObjects();
-            spawnedObject1.SetActive(false);
-            poolCol1.Add(spawnedObject1);
-            spawnedObject2 = CreateObjects();
-            spawnedObject2.SetActive(false);
-            poolCol2.Add(spawnedObject2);
-            spawnedObject3 = CreateObjects();
-            spawnedObject3.SetActive(false);
-            poolCol3.Add(spawnedObject3);
-            spawnedObject4 = CreateObjects();
-            spawnedObject4.SetActive(false);
-            poolCol4.Add(spawnedObject4);
-
-        }
         stackedCol1 = 0;
         stackedCol2 = 0;
         stackedCol3 = 0;
         stackedCol4 = 0;
+        numberOfSquareToCreate = 40;
+        firstInstantiation = false;
+    }
+    void Start()
+    {
+        if (!firstInstantiation)
+        {
+            for (int i = 0; i < numberOfSquareToCreate; i++)
+            {
+                spawnedObject = CreateObjects();
+                commonPool.Add(spawnedObject);
+            }
+            firstInstantiation = true;
+        }
     }
 
     void Update()
@@ -57,44 +51,50 @@ public class SpawnManager : MonoBehaviour
     IEnumerator SpawnSquares(int column)
     {
         GameObject spawnedSquare = null;
+        int rng = Random.Range(0,commonPool.Count);
+        spawnedSquare = commonPool[rng];
+        commonPool.RemoveAt(rng);
+        spawnedSquare.transform.position = cols[column-1].position;
         switch (column)
         {
             case 1:
-                spawnedSquare = poolCol1[0];
-                spawnedSquare.transform.position = cols[0].position;
-                poolCol1.RemoveAt(0);
-                poolCol1.Add(spawnedSquare);
                 stackedCol1++;
                 break;
             case 2:
-                spawnedSquare = poolCol2[0];
-                spawnedSquare.transform.position = cols[1].position;
-                poolCol2.RemoveAt(0);
-                poolCol2.Add(spawnedSquare);
                 stackedCol2++;
-
                 break;
             case 3:
-                spawnedSquare = poolCol3[0];
-                spawnedSquare.transform.position = cols[2].position;
-                poolCol3.RemoveAt(0);
-                poolCol3.Add(spawnedSquare);
                 stackedCol3++;
                 break;
             case 4:
-                spawnedSquare = poolCol4[0];
-                spawnedSquare.transform.position = cols[3].position;
-                poolCol4.RemoveAt(0);
-                poolCol4.Add(spawnedSquare);
                 stackedCol4++;
                 break;
             default:
                 break;
         }
-        spawnedSquare.GetComponent<SquareInfo>().columnSpawned = column;
-        spawnedSquare.GetComponent<Rigidbody2D>().simulated = true;
-        spawnedSquare.SetActive(true);
+        spawnedSquare.GetComponent<SquareBehavior>().ActivateSquare(column);
         yield return new WaitForSeconds(0.5f);
+    }
 
+    public void Respawn(int column, GameObject squareObject)
+    {
+        commonPool.Add(squareObject);
+        switch (column)
+        {
+            case 1:
+                stackedCol1--;
+                break;
+            case 2:
+                stackedCol2--;
+                break;
+            case 3:
+                stackedCol3--;
+                break;
+            case 4:
+                stackedCol4--;
+                break;
+            default: break;
+        }
+        SpawnSquares(column);
     }
 }
