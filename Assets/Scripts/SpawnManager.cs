@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
+    [SerializeField] Transform poolDepot;
     [SerializeField] Transform[] cols;
     [SerializeField] GameObject[] cubes;
-    [SerializeField] Transform poolDepot;
     public List<GameObject> commonPool;
     public List<GameObject> toDeletePool;
     GameObject spawnedObject;
@@ -25,7 +25,7 @@ public class SpawnManager : MonoBehaviour
         numberOfSquareToCreate = 40;
         firstInstantiation = false;
     }
-    void Start()
+    private void Start()
     {
         if (!firstInstantiation)
         {
@@ -38,18 +38,18 @@ public class SpawnManager : MonoBehaviour
         }
     }
 
-    void Update()
+    private void Update()
     {
         if (stackedCol1 < 8) StartCoroutine(SpawnSquares(1));
         if (stackedCol2 < 8) StartCoroutine(SpawnSquares(2));
         if (stackedCol3 < 8) StartCoroutine(SpawnSquares(3));
         if (stackedCol4 < 8) StartCoroutine(SpawnSquares(4));
     }
-    GameObject CreateObjects()
+    private GameObject CreateObjects()
     {
         return Instantiate(cubes[Random.Range(0, 5)], poolDepot.position, Quaternion.identity);
     }
-    IEnumerator SpawnSquares(int column)
+    private IEnumerator SpawnSquares(int column)
     {
         GameObject spawnedSquare = null;
         int rng = Random.Range(0,commonPool.Count);
@@ -104,7 +104,7 @@ public class SpawnManager : MonoBehaviour
     }
     public IEnumerator DeleteSquares()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.2f);
         foreach(GameObject objToDelete in toDeletePool)
         {
             objToDelete.GetComponent<SquareBehavior>().DisableSquare();

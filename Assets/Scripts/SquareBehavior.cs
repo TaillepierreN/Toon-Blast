@@ -1,15 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SquareBehavior : MonoBehaviour
 {
     [SerializeField] string color;
-    public int columnSpawned;
     SpawnManager spawner;
     Rigidbody2D rg;
-    int layerMask;
     bool isSelected;
+    int layerMask;
+    int columnSpawned;
+    float offset = 0.6f;
     private void Awake()
     {
         spawner = GameObject.Find("GameManager").GetComponent<SpawnManager>();
@@ -17,28 +16,28 @@ public class SquareBehavior : MonoBehaviour
     }
     private void Start()
     {
+        isSelected = false;
         switch (color)
         {
             case "blue":
                 layerMask = LayerMask.GetMask("BlueSquare");
                 break;
             case "green":
-                layerMask = LayerMask.GetMask("GreenSquare");;
+                layerMask = LayerMask.GetMask("GreenSquare");
                 break;
             case "red":
-                layerMask = LayerMask.GetMask("RedSquare");;
+                layerMask = LayerMask.GetMask("RedSquare");
                 break;
             case "white":
-                layerMask = LayerMask.GetMask("WhiteSquare");;
+                layerMask = LayerMask.GetMask("WhiteSquare");
                 break;
             case "yellow":
-                layerMask = LayerMask.GetMask("YellowSquare");;
+                layerMask = LayerMask.GetMask("YellowSquare");
                 break;
 
             default:
-            break;
+                break;
         }
-        isSelected = false;
     }
     public void ActivateSquare(int col)
     {
@@ -57,50 +56,50 @@ public class SquareBehavior : MonoBehaviour
         isSelected = false;
         gameObject.SetActive(false);
     }
-    
+
 
     public void DeleteAndCheckAround(string dir)
     {
         spawner.AddToDeletePool(gameObject);
         isSelected = true;
-        RaycastHit2D hitUp = Physics2D.Raycast((transform.position + new Vector3(0,0.6f,0)), transform.TransformDirection(Vector2.up), 0.5f, layerMask);
-        RaycastHit2D hitRight = Physics2D.Raycast((transform.position + new Vector3(0.6f,0,0)), transform.TransformDirection(Vector2.right), 0.5f, layerMask);
-        RaycastHit2D hitDown = Physics2D.Raycast((transform.position - new Vector3(0,0.6f,0)), transform.TransformDirection(Vector2.down), 0.5f, layerMask);
-        RaycastHit2D hitLeft = Physics2D.Raycast((transform.position - new Vector3(0.6f,0,0)), transform.TransformDirection(Vector2.left), 0.5f, layerMask);
-        if (hitUp.collider != null && dir!="up")
+        RaycastHit2D hitUp = Physics2D.Raycast((transform.position + new Vector3(0, offset, 0)), transform.TransformDirection(Vector2.up), 0.5f, layerMask);
+        RaycastHit2D hitRight = Physics2D.Raycast((transform.position + new Vector3(offset, 0, 0)), transform.TransformDirection(Vector2.right), 0.5f, layerMask);
+        RaycastHit2D hitDown = Physics2D.Raycast((transform.position - new Vector3(0, offset, 0)), transform.TransformDirection(Vector2.down), 0.5f, layerMask);
+        RaycastHit2D hitLeft = Physics2D.Raycast((transform.position - new Vector3(offset, 0, 0)), transform.TransformDirection(Vector2.left), 0.5f, layerMask);
+        if (hitUp.collider != null && dir != "up")
         {
             SquareBehavior targetUp = hitUp.collider.gameObject.GetComponent<SquareBehavior>();
             if (color == targetUp.color)
             {
-                if(!targetUp.isSelected)
-                targetUp.DeleteAndCheckAround("down");
+                if (!targetUp.isSelected)
+                    targetUp.DeleteAndCheckAround("down");
             }
         }
-        if (hitRight.collider != null && dir!="right")
+        if (hitRight.collider != null && dir != "right")
         {
             SquareBehavior targetRight = hitRight.collider.gameObject.GetComponent<SquareBehavior>();
             if (color == targetRight.color)
             {
-                if(!targetRight.isSelected)
-                targetRight.DeleteAndCheckAround("left");
+                if (!targetRight.isSelected)
+                    targetRight.DeleteAndCheckAround("left");
             }
         }
-        if (hitDown.collider != null && dir!="down")
+        if (hitDown.collider != null && dir != "down")
         {
             SquareBehavior targetDown = hitDown.collider.gameObject.GetComponent<SquareBehavior>();
             if (color == targetDown.color)
             {
-                if(!targetDown.isSelected)
-                targetDown.DeleteAndCheckAround("up");
+                if (!targetDown.isSelected)
+                    targetDown.DeleteAndCheckAround("up");
             }
         }
-        if (hitLeft.collider != null && dir!="left")
+        if (hitLeft.collider != null && dir != "left")
         {
             SquareBehavior targetLeft = hitLeft.collider.gameObject.GetComponent<SquareBehavior>();
             if (color == targetLeft.color)
             {
-                if(!targetLeft.isSelected)
-                targetLeft.DeleteAndCheckAround("right");
+                if (!targetLeft.isSelected)
+                    targetLeft.DeleteAndCheckAround("right");
             }
         }
     }
