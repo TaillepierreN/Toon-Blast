@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7405743641173539011}
   - component: {fileID: -6253706756264518344}
   - component: {fileID: -8182386508590946228}
-  m_Layer: 6
+  m_Layer: 9
   m_Name: WhiteSquare
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -166,7 +166,7 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: -6253706756264518344}
           m_TargetAssemblyTypeName: SquareBehavior, Assembly-CSharp
-          m_MethodName: DisableSquare
+          m_MethodName: SelectedSquare
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}

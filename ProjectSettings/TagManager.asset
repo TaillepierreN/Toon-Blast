@@ -11,11 +11,11 @@ TagManager:
   - 
   - Water
   - UI
-  - DestructibleSquares
-  - 
-  - 
-  - 
-  - 
+  - BlueSquare
+  - GreenSquare
+  - RedSquare
+  - WhiteSquare
+  - YellowSquare
   - 
   - 
   - 

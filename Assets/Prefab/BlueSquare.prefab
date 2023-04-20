@@ -166,7 +166,7 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: -1989226983853123305}
           m_TargetAssemblyTypeName: SquareBehavior, Assembly-CSharp
-          m_MethodName: DisableSquare
+          m_MethodName: SelectedSquare
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}

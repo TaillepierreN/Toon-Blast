@@ -8,6 +8,7 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] GameObject[] cubes;
     [SerializeField] Transform poolDepot;
     public List<GameObject> commonPool;
+    public List<GameObject> toDeletePool;
     GameObject spawnedObject;
     public int stackedCol1;
     public int stackedCol2;
@@ -96,5 +97,18 @@ public class SpawnManager : MonoBehaviour
             default: break;
         }
         SpawnSquares(column);
+    }
+    public void AddToDeletePool(GameObject objToAddToPool)
+    {
+        toDeletePool.Add(objToAddToPool);
+    }
+    public IEnumerator DeleteSquares()
+    {
+        yield return new WaitForSeconds(0.5f);
+        foreach(GameObject objToDelete in toDeletePool)
+        {
+            objToDelete.GetComponent<SquareBehavior>().DisableSquare();
+        }
+            toDeletePool.Clear();
     }
 }
